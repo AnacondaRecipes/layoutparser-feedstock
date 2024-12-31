@@ -39,9 +39,9 @@ test:
   commands:
     # skipping pip check because of error
     # pdfplumber X.X.X has requirement pdfminer.six==YYYYMMDD, but you have pdfminer-six 0.0.1.
-    #- pip check
-  requires:
-    - pip
+  #   - pip check
+  # requires:
+  #   - pip
 
 about:
   home: https://layout-parser.github.io
