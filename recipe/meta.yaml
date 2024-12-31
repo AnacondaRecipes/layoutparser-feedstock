@@ -44,10 +44,16 @@ test:
     - pip
 
 about:
-  home: https://github.com/Layout-Parser/layout-parser
+  home: https://layout-parser.github.io
   summary: A unified toolkit for Deep Learning Based Document Image Analysis
+  description: |
+    LayoutParser aims to provide a wide range of tools that aims to streamline Document Image Analysis (DIA) tasks.
   license: Apache-2.0
   license_file: LICENSE
+  license_family: Apache
+  doc_url: https://layout-parser.readthedocs.io
+  dev_url: https://github.com/Layout-Parser/layout-parser
+
 
 extra:
   recipe-maintainers:
