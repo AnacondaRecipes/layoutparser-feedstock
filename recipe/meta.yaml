@@ -58,3 +58,5 @@ about:
 extra:
   recipe-maintainers:
     - boldorider4
+  skip-lints:
+    - missing_pip_check
