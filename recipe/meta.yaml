@@ -10,6 +10,8 @@ source:
   sha256: 0dfb2194c36a5ad1075b8310f3cbc280c00306d1758cef127d20283f7ce085ea
 
 build:
+  # skip because of missing pdfplumber
+  skip: True  # [py>311]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
