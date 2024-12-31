@@ -1,0 +1,3 @@
+channels:
+  - https://staging.continuum.io/prefect/fs/iopath-feedstock/pr2/c8d86e6
+  - https://staging.continuum.io/prefect/fs/pdfplumber-feedstock/pr2/d3d3aaf
