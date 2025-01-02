@@ -38,8 +38,8 @@ requirements:
     - iopath
     - pdfplumber
     - pdf2image
-  run_constrained:
-    - google-cloud-vision >1.0.0,<2
+    # actually we should require >1.0.0,<2
+    - google-cloud-vision
 
 # these are optional backends that are missing: google-cloud-vision >1.0.0,<2, detectron2, paddlepaddle and effdet
 {% set tests_to_skip = "test_Detectron2Model or test_PaddleDetectionModel or test_EffDetModel or test_AutoModel" %}
