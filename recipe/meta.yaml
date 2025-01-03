@@ -12,6 +12,8 @@ source:
   - url: https://github.com/Layout-Parser/layout-parser/archive/refs/tags/v{{ version }}.tar.gz
     sha256: 64d77d9777653a6aaad6c45c5b8a8de3ac884f312fc3feabf53bef72fbf362e0
     folder: github
+    patches:
+      - 0001-do-not-require-gcv-agent-in-tests.patch
 
 build:
   # skip because of missing pdfplumber
@@ -22,6 +24,9 @@ build:
   number: 0
 
 requirements:
+  build:
+    - patch     # [not win]
+    - m2-patch  # [win]
   host:
     - python
     - pip
