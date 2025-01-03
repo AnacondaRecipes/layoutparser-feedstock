@@ -64,7 +64,7 @@ test:
     - pytest -v -k "not ({{ tests_to_skip }})" tests
   requires:
     - pytest
-    - pytesseract
+    - pytesseract  # [not win]
 
 about:
   home: https://layout-parser.github.io
