@@ -53,6 +53,9 @@ requirements:
 {% set tests_to_skip = "test_Detectron2Model or test_PaddleDetectionModel or test_EffDetModel or test_AutoModel" %}
 # google-cloud-vision >1.0.0,<2 is missing, fortunately it is a dev requirement
 {% set tests_to_skip = tests_to_skip + " or test_gcv_agent or test_viz" %}
+# skip tesseract test on win
+{% set tests_to_ignore = "" %}
+{% set tests_to_ignore = tests_to_ignore + "--ignore=tests/test_ocr.py" %}
 
 test:
   source_files:
@@ -66,7 +69,7 @@ test:
   # requires:
   #   - pip
     - cd github
-    - pytest -v -k "not ({{ tests_to_skip }})" tests
+    - pytest -v -k "not ({{ tests_to_skip }})" {{ tests_to_ignore }} tests
   requires:
     - pytest
     - pytesseract  # [not win]
