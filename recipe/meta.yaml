@@ -16,8 +16,6 @@ source:
       - 0001-do-not-require-gcv-agent-in-tests.patch
 
 build:
-  # skip because of missing pdfplumber
-  skip: True  # [py>311]
   # skip s390x because of opencv and pdfplumber
   skip: True  # [s390x]
   script: cd pypi && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
