@@ -56,7 +56,7 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or test_gcv_agent or test_viz" %}
 # skip tesseract test on win
 {% set tests_to_ignore = "" %}
-{% set tests_to_ignore = tests_to_ignore + "--ignore=tests/test_ocr.py" %}
+{% set tests_to_ignore = tests_to_ignore + "--ignore=tests/test_ocr.py" %}  # [win]
 
 test:
   source_files:
