@@ -45,9 +45,10 @@ requirements:
     - pdf2image
   run_constrained:
     - google-cloud-vision >1.0.0,<2
-    - sphinx ==3.0.0
-    - docutils ==0.16
-    - recommonmark ==0.6.0
+    - sphinx >=3.0.0
+    # the selector here makes this installable on aarch64 and arm64, since there we don't have docutils
+    - docutils >=0.16  # [not (aarch64 or arm64)]
+    - recommonmark >=0.6.0
 
 # these are optional backends that are missing: detectron2, paddlepaddle and effdet
 {% set tests_to_skip = "test_Detectron2Model or test_PaddleDetectionModel or test_EffDetModel or test_AutoModel" %}
