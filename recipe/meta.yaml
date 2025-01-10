@@ -18,6 +18,8 @@ source:
 build:
   # skip s390x because of opencv and pdfplumber
   skip: True  # [s390x]
+  # skip py313 because of missing opencv
+  skip: True  # [py>312]
   script: cd pypi && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
