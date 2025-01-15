@@ -1,0 +1,91 @@
+{% set name = "layoutparser" %}
+{% set version = "0.3.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+    sha256: 0dfb2194c36a5ad1075b8310f3cbc280c00306d1758cef127d20283f7ce085ea
+    folder: pypi
+  - url: https://github.com/Layout-Parser/layout-parser/archive/refs/tags/v{{ version }}.tar.gz
+    sha256: 64d77d9777653a6aaad6c45c5b8a8de3ac884f312fc3feabf53bef72fbf362e0
+    folder: github
+    patches:
+      - 0001-do-not-require-gcv-agent-in-tests.patch
+
+build:
+  # skip s390x because of opencv and pdfplumber
+  skip: True  # [s390x]
+  # skip py313 because of missing opencv
+  skip: True  # [py>312]
+  script: cd pypi && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  build:
+    - patch     # [not win]
+    - m2-patch  # [win]
+  host:
+    - python
+    - pip
+    - wheel
+    - setuptools
+  run:
+    - python
+    - numpy
+    - opencv
+    - scipy
+    - pandas
+    - pillow
+    - pyyaml >=5.1
+    - iopath
+    - pdfplumber
+    - pdf2image
+  run_constrained:
+    - google-cloud-vision >=1.0.0,<2
+    - paddlepaddle >=2.1.0,<3.0.0
+
+# these are optional backends that are missing: detectron2, paddlepaddle and effdet
+{% set tests_to_skip = "test_Detectron2Model or test_PaddleDetectionModel or test_EffDetModel or test_AutoModel" %}
+# google-cloud-vision >1.0.0,<2 is missing, fortunately it is a dev requirement
+{% set tests_to_skip = tests_to_skip + " or test_gcv_agent or test_viz" %}
+# skip tesseract test on win
+{% set tests_to_ignore = "" %}
+{% set tests_to_ignore = tests_to_ignore + "--ignore=tests/test_ocr.py" %}
+
+test:
+  source_files:
+    - github/tests
+  imports:
+    - layoutparser
+  commands:
+    # skipping pip check because of error
+    # pdfplumber X.X.X has requirement pdfminer.six==YYYYMMDD, but you have pdfminer-six 0.0.1.
+  #   - pip check
+  # requires:
+  #   - pip
+    - cd github
+    - pytest -v -k "not ({{ tests_to_skip }})" {{ tests_to_ignore }} tests
+  requires:
+    - pytest
+    - pytesseract  # [not win]
+
+about:
+  home: https://layout-parser.github.io
+  summary: A unified toolkit for Deep Learning Based Document Image Analysis
+  description: |
+    LayoutParser aims to provide a wide range of tools that aims to streamline Document Image Analysis (DIA) tasks.
+  license: Apache-2.0
+  license_file: pypi/LICENSE
+  license_family: Apache
+  doc_url: https://layout-parser.readthedocs.io
+  dev_url: https://github.com/Layout-Parser/layout-parser
+
+
+extra:
+  recipe-maintainers:
+    - boldorider4
+  skip-lints:
+    - missing_pip_check

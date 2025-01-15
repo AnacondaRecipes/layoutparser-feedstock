@@ -1,0 +1,25 @@
+From ebf46e26823fa2ba07319b14bae094e5fe96007b Mon Sep 17 00:00:00 2001
+From: Jack Olivieri <jolivieri@anaconda.com>
+Date: Fri, 3 Jan 2025 13:14:48 +0100
+Subject: [PATCH] do not require gcv agent in tests
+
+---
+ tests/test_ocr.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/test_ocr.py b/tests/test_ocr.py
+index 0c42cfc..d99fce0 100644
+--- a/tests/test_ocr.py
++++ b/tests/test_ocr.py
+@@ -13,7 +13,7 @@
+ # limitations under the License.
+ 
+ from layoutparser import (
+-    GCVAgent,
++#    GCVAgent,
+     GCVFeatureType,
+     TesseractAgent,
+     TesseractFeatureType,
+-- 
+2.39.5 (Apple Git-154)
+
