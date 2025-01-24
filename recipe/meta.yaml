@@ -60,13 +60,13 @@ test:
   imports:
     - layoutparser
   commands:
-    # skipping pip check because of error
-    # pdfplumber X.X.X has requirement pdfminer.six==YYYYMMDD, but you have pdfminer-six 0.0.1.
+    - pip check
     - cd github
     - pytest -v -k "not ({{ tests_to_skip }})" {{ tests_to_ignore }} tests
   requires:
     - pytest
     - pytesseract  # [not win]
+    - pip
 
 about:
   home: https://layout-parser.github.io
@@ -83,5 +83,3 @@ about:
 extra:
   recipe-maintainers:
     - boldorider4
-  skip-lints:
-    - missing_pip_check
