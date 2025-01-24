@@ -21,7 +21,7 @@ build:
   # skip py313 because of missing opencv
   skip: True  # [py>312]
   script: cd pypi && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -44,7 +44,6 @@ requirements:
     - pdfplumber
     - pdf2image
   run_constrained:
-    - google-cloud-vision >=1.0.0,<2
     - paddlepaddle >=2.1.0,<3.0.0
 
 # these are optional backends that are missing: detectron2, paddlepaddle and effdet
@@ -61,16 +60,13 @@ test:
   imports:
     - layoutparser
   commands:
-    # skipping pip check because of error
-    # pdfplumber X.X.X has requirement pdfminer.six==YYYYMMDD, but you have pdfminer-six 0.0.1.
-  #   - pip check
-  # requires:
-  #   - pip
+    - pip check
     - cd github
     - pytest -v -k "not ({{ tests_to_skip }})" {{ tests_to_ignore }} tests
   requires:
     - pytest
     - pytesseract  # [not win]
+    - pip
 
 about:
   home: https://layout-parser.github.io
@@ -87,5 +83,3 @@ about:
 extra:
   recipe-maintainers:
     - boldorider4
-  skip-lints:
-    - missing_pip_check
