@@ -21,12 +21,9 @@ build:
   # skip py313 because of missing opencv
   skip: True  # [py>312]
   script: cd pypi && {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 2
 
 requirements:
-  build:
-    - patch     # [not win]
-    - m2-patch  # [win]
   host:
     - python
     - pip
